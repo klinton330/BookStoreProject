@@ -1,11 +1,15 @@
 package com.bookstore.entity;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -24,6 +28,12 @@ public class Customer {
 	private String zip;
 	private String password;
 	private Date register_date;
+	@OneToMany
+	@JoinColumn(name = "customer_id")
+	Set<BookOrders>bookOrders=new HashSet<BookOrders>();
+	@OneToMany
+	@JoinColumn(name = "customer_id")
+	Set<Review>review=new HashSet<Review>();
 	public int getCustomer_id() {
 		return customer_id;
 	}

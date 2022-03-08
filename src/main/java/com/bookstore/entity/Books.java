@@ -5,9 +5,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -25,12 +29,16 @@ public class Books {
 	private double price;
 	private Date publish_date;
 	private Date last_update;
-	//Many to One
+	@ManyToOne
     private Catagory catagory_id;
-    //One to Many
+    @OneToMany
+    @JoinColumn(name="book_id")
     private Set <Review>reveiw =new HashSet<Review>();
+    @OneToMany
+    @JoinColumn(name="book_id")
    private  Set<OrderDetails> orderDetails=new HashSet<OrderDetails>();
-	public Integer getBook_id() {
+	
+    public Integer getBook_id() {
 		return book_id;
 	}
 	public void setBook_id(Integer book_id) {

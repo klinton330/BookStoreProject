@@ -1,10 +1,14 @@
 package com.bookstore.entity;
 
 import java.util.Date;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -14,6 +18,8 @@ public class BookOrders {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int order_id;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "customer_id", nullable = false)
 	private Customer customer_id;
 	private Date order_date;
 	private String shipping_address;

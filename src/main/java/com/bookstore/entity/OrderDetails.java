@@ -1,14 +1,13 @@
 package com.bookstore.entity;
 
-import javax.persistence.AttributeOverride;
-import javax.persistence.AttributeOverrides;
-import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "")
+@Table(name = "order_details")
 public class OrderDetails {
 
 	private OrderDetailsId id = new OrderDetailsId();
@@ -16,7 +15,7 @@ public class OrderDetails {
 	private Books book_id;
 	private int quantity;
 	private float subtotal;
-
+	@EmbeddedId
 	public OrderDetailsId getId() {
 		return id;
 	}
@@ -24,7 +23,8 @@ public class OrderDetails {
 	public void setId(OrderDetailsId id) {
 		this.id = id;
 	}
-
+	@ManyToOne
+	@JoinColumn(name = "order_id")
 	public BookOrders getOrder_id() {
 		return order_id;
 	}
@@ -32,7 +32,8 @@ public class OrderDetails {
 	public void setOrder_id(BookOrders order_id) {
 		this.order_id = order_id;
 	}
-
+	@ManyToOne
+	@JoinColumn(name = "book_id")
 	public Books getBook_id() {
 		return book_id;
 	}

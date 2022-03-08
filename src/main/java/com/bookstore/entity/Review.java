@@ -2,16 +2,23 @@ package com.bookstore.entity;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+@Entity
+@Table(name = "")
 public class Review {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int review_id;
+	@ManyToOne
 	private Books book_id;
+	@ManyToOne
 	private Customer customer_id;
 	private int rating;
 	private String headline;
