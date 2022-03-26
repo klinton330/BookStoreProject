@@ -1,11 +1,13 @@
 package com.bookstore.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Embeddable
-public class OrderDetailsId {
+public class OrderDetailsId implements Serializable {
 	private Books book;
 	private BookOrders bookOrder;
 
