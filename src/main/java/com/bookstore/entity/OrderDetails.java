@@ -1,5 +1,7 @@
 package com.bookstore.entity;
 
+import java.io.Serializable;
+
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -8,7 +10,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "order_details")
-public class OrderDetails {
+public class OrderDetails implements Serializable{
 
 	private OrderDetailsId id = new OrderDetailsId();
     private BookOrders order_id;
@@ -24,7 +26,7 @@ public class OrderDetails {
 		this.id = id;
 	}
 	@ManyToOne
-	@JoinColumn(name = "order_id")
+	@JoinColumn(name = "order_id",insertable = false, updatable = false, nullable = false)
 	public BookOrders getOrder_id() {
 		return order_id;
 	}
@@ -33,7 +35,7 @@ public class OrderDetails {
 		this.order_id = order_id;
 	}
 	@ManyToOne
-	@JoinColumn(name = "book_id")
+	@JoinColumn(name = "book_id", insertable = false, updatable = false, nullable = false)
 	public Books getBook_id() {
 		return book_id;
 	}
