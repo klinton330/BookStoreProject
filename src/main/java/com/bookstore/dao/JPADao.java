@@ -1,6 +1,9 @@
 package com.bookstore.dao;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 public class JPADao<E> {
 
@@ -37,5 +40,18 @@ public class JPADao<E> {
 		Object reference = entityManager.getReference(entityClass, primaryKey);
 		entityManager.remove(reference);
 		entityManager.getTransaction().commit();
+	}
+	
+	public List<E> findWithNamedQuery(String queryName)
+	{
+		Query query=	entityManager.createNamedQuery(queryName);
+		return query.getResultList();
+	}
+	
+	public long totalCount(String queryName)
+	{
+		Query query=entityManager.createNamedQuery(queryName);
+		return (long) query.getSingleResult();
+		
 	}
 }

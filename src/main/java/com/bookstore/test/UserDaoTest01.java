@@ -2,6 +2,8 @@ package com.bookstore.test;
 
 import static org.junit.Assert.*;
 
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -81,6 +83,13 @@ public class UserDaoTest01 {
 	}
 	
 	@Test
+	public void findByNamedQueryTest()
+	{
+	   List<Users>list=userdao.listAll();
+	   assertTrue(list.size()>0);
+	   list.forEach(n->System.out.println(n.getFullName()+" "+n.getPassword()+" "+n.getEmail()));
+	}
+	@Test
 	public void deleteUser()
 	{
 		userdao.delete(2);
@@ -92,5 +101,13 @@ public class UserDaoTest01 {
 	public void deleteNotExixtingUser()
 	{
 		userdao.delete(77);
+	}
+	
+	@Test
+	public void countAllTest()
+	{
+		long l=userdao.count();
+		System.out.println(l);
+		assertTrue(l>0);
 	}
 }

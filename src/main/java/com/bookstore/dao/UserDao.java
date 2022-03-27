@@ -32,13 +32,11 @@ public class UserDao extends JPADao<Users> implements GenericDao<Users> {
 	}
 
 	public List<Users> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return super.findWithNamedQuery("users.findAll");
 	}
 
 	public long count() {
-		// TODO Auto-generated method stub
-		return 0;
+		return super.totalCount("user.count");
 	}
 
 }
