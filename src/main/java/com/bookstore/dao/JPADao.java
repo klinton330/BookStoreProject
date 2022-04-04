@@ -42,16 +42,19 @@ public class JPADao<E> {
 		entityManager.getTransaction().commit();
 	}
 	
-	public List<E> findWithNamedQuery(String queryName)
+	public List<E> findWithNamedQuery(String queryName,int label, int noOfRecords)
 	{
+		System.out.println("Label:"+label+" "+"NoOfRecords:"+noOfRecords);
 		Query query=	entityManager.createNamedQuery(queryName);
+		query.setMaxResults(noOfRecords);
+		query.setFirstResult(label);
 		return query.getResultList();
 	}
 	
 	public long totalCount(String queryName)
 	{
 		Query query=entityManager.createNamedQuery(queryName);
-		return (long) query.getSingleResult();
+		return  (long) query.getSingleResult();
 		
 	}
 }
