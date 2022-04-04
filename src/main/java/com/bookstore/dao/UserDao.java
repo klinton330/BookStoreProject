@@ -31,12 +31,14 @@ public class UserDao extends JPADao<Users> implements GenericDao<Users> {
 		
 	}
 
-	public List<Users> listAll() {
-		return super.findWithNamedQuery("users.findAll");
+	public List<Users> listAll(int label, int noOfRecords) {
+		return super.findWithNamedQuery("users.findAll",label,noOfRecords);
 	}
 
 	public long count() {
 		return super.totalCount("user.count");
 	}
+
+
 
 }

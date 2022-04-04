@@ -82,13 +82,13 @@ public class UserDaoTest01 {
 		assertNull(user);
 	}
 	
-	@Test
+	/*@Test
 	public void findByNamedQueryTest()
 	{
 	   List<Users>list=userdao.listAll();
 	   assertTrue(list.size()>0);
 	   list.forEach(n->System.out.println(n.getFullName()+" "+n.getPassword()+" "+n.getEmail()));
-	}
+	}*/
 	@Test
 	public void deleteUser()
 	{

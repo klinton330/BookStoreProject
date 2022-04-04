@@ -122,7 +122,7 @@ padding: 5px
 		</div>
 		</div>
 		<div class="header-link">
-		<a href="">Users</a> <a href="">Catagories</a> <a href="">Books</a>
+		<a href="list_users">Users</a> <a href="">Catagories</a> <a href="">Books</a>
 		<a href="">Customers</a> <a href="">Reviews</a> <a href="">Orders</a>
 		
 	</div>

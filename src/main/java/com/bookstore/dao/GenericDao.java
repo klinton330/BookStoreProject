@@ -12,7 +12,7 @@ public interface GenericDao<T> {
 
 	public void delete(int id);
 
-	public List<T> listAll();
+	public List<T> listAll(int label, int noOfRecords);
 
 	public long count();
 
