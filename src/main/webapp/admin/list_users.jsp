@@ -21,8 +21,6 @@
 	display: flex;
 	justify-content: center;
 }
-
-
 </style>
 <meta charset="ISO-8859-1">
 <title>List Users</title>
@@ -31,7 +29,11 @@
 	<%@ include file="header.jsp"%>
 	<div style="text-align: center; padding-top: 10px;">
 		<h2>Users Management</h2>
-		<a href="">Create New Users</a>
+		<a href="users_form.jsp">Create New Users</a>
+		
+		<div align="center" style="color: green;">
+			<h5>${message}</h5>
+		</div>
 	</div>
 	<div></div>
 	<div style="">
@@ -103,8 +105,8 @@
 						<option value="20">15</option>
 					</select>
 				</div>
-				&nbsp; 	&nbsp;
-				<button type="submit" class="btn btn-primary"  >Submit</button>
+				&nbsp; &nbsp;
+				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>
 	</div>

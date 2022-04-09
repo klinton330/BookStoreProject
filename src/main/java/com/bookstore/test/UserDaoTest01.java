@@ -104,6 +104,13 @@ public class UserDaoTest01 {
 	}
 	
 	@Test
+	public void getByEmail()
+	{
+		String email="rishab@gmail.cssom";
+		Users user=userdao.findByEmail(email);
+		assertNotNull(user);
+	}
+	@Test
 	public void countAllTest()
 	{
 		long l=userdao.count();

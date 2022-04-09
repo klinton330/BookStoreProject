@@ -12,8 +12,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "users")
 @NamedQueries
-({@NamedQuery(name = "users.findAll",query = "select user from Users user"),
-	@NamedQuery(name = "user.count",  query = "select count(user) from Users user")})
+({@NamedQuery(name = "users.findAll",query = "select user from Users user ORDER BY user.userid DESC"),
+	@NamedQuery(name = "user.count",  query = "select count(user) from Users user"),
+    @NamedQuery(name="user.findByEmail",query = "select user from Users user where user.email=:email")})
 public class Users {
 	
 	@Id

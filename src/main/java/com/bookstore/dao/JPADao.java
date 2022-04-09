@@ -51,6 +51,13 @@ public class JPADao<E> {
 		return query.getResultList();
 	}
 	
+	public List<E> findWithNamedQuery(String queryName,String pos,String email)
+	{
+		Query query=	entityManager.createNamedQuery(queryName);
+		query.setParameter(pos, email);
+		return query.getResultList();
+	}
+	
 	public long totalCount(String queryName)
 	{
 		Query query=entityManager.createNamedQuery(queryName);
