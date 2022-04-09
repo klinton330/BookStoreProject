@@ -27,6 +27,7 @@ public class UsersServices {
 		createEntityManager = createEntityManagerFactory.createEntityManager();
 		userdao = new UserDao(createEntityManager);
 		System.out.println("User service called");
+		///
 	}
 
 	public void listUsers(HttpServletRequest request, HttpServletResponse response)
