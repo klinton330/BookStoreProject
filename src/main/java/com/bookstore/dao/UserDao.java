@@ -17,14 +17,17 @@ public class UserDao extends JPADao<Users> implements GenericDao<Users> {
 		return super.Create(t);
 	}
 
-	public Users findByEmail(String email)
+	public List<Users> findByEmail(String email)
 	{
 		List<Users>userList= super.findWithNamedQuery("user.findByEmail", "email", email);
+		/*System.out.println("From Dao:"+userList);
 		if(userList!=null && userList.size()==1)
 		{
 			return userList.get(0);
 		}
-		return null;
+		return null;*/
+		return userList;
+		
 	}
 	public Users update(Users t) {
 		return super.update(t);
