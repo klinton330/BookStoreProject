@@ -33,24 +33,44 @@
 <body>
 	<%@ include file="header.jsp"%>
 	<div class="form">
-		<h2 style="color: green;">Create New User</h2>
-		
+
+		<h2 style="color: green;">
+			<c:if test="${user!=null}">
+		Edit User
+		</c:if>
+
+		<c:if test="${user==null}">
+		Create New User
+	</c:if>
+		</h2>
 		<div align="center" style="color: red;">
 			<h5>${message}</h5>
 		</div>
-		<form action="create_user" class="col-md-4" onsubmit="return validate() ">
+		<c:if test="${user==null}">
+		<form action="create_user" class="col-md-4"
+			onsubmit="return validate() ">
+			</c:if>
+			
+			<c:if test="${user!=null}">
+			<form action="update_user" class="col-md-4"
+			onsubmit="return validate() ">
+			<input type="hidden" name="id" value="${user.userid}">
+			</c:if>
 
 			<div class="form-group">
 				<label for="full_name">Full Name:</label> <input type="text"
-					class="form-control"  name="full_name" id="full_name"> <span id="name_remark"></span>
+					class="form-control" name="full_name" id="full_name"
+					value="${user.fullName}"> <span id="name_remark"></span>
 			</div>
 			<div class="form-group">
 				<label for="email">Email address:</label> <input type="email"
-					class="form-control"  name="email" id="email" autocomplete="off"> <span id="name_email"></span>
+					class="form-control" name="email" id="email" autocomplete="off"
+					value="${user.email}""> <span id="name_email"></span>
 			</div>
 			<div class="form-group">
 				<label for="pwd">Password:</label> <input type="password"
-					class="form-control" name="pwd" id="pwd" autocomplete="off"> <span id="name_password"></span>
+					class="form-control" name="pwd" id="pwd" autocomplete="off"
+					value="${user.password}""> <span id="name_password"></span>
 			</div>
 
 			<button type="submit" class="btn btn-primary">Submit</button>
@@ -65,29 +85,29 @@
 	function validate() {
 		name_email
 		name_password
-		
+
 		var fullName = document.getElementById("full_name");
 		var email = document.getElementById("email");
 		var password = document.getElementById("pwd");
 		if (fullName.value.length == 0) {
-		//	alert("Name Field should not empty");
-			var f=document.getElementById("name_remark");
-			f.innerText="Name Field should not empty"
+			//	alert("Name Field should not empty");
+			var f = document.getElementById("name_remark");
+			f.innerText = "Name Field should not empty"
 			fullName.focus();
 			return false;
 		}
 		if (email.value.length == 0) {
 			//alert("Email should not empty");
-			var f=document.getElementById("name_emailc");
-			f.innerText="Email Field should not empty"
+			var f = document.getElementById("name_emailc");
+			f.innerText = "Email Field should not empty"
 			email.focus();
 			return false;
 		}
 
 		if (password.value.length == 0) {
 			//alert("Password should not empty");
-		var f=document.getElementById("name_password");
-			f.innerText="Password Field should not empty"
+			var f = document.getElementById("name_password");
+			f.innerText = "Password Field should not empty"
 			password.focus();
 			return false;
 

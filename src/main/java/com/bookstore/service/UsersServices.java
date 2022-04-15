@@ -27,7 +27,7 @@ public class UsersServices {
 		createEntityManager = createEntityManagerFactory.createEntityManager();
 		userdao = new UserDao(createEntityManager);
 		System.out.println("User service called");
-		///
+
 	}
 
 	public void listUsers(HttpServletRequest request, HttpServletResponse response)
@@ -75,17 +75,89 @@ public class UsersServices {
 		user.setEmail(email);
 		user.setPassword(password);
 
-		Users exixt = userdao.findByEmail(email);
-		if (exixt != null) {
-			String message = "Email is already exixt in Database";
+		List<Users> emailList = userdao.findByEmail(email);
+		System.out.println("service:"+emailList);
+		if (emailList.size()==1) {
+			String message = "Email is already exixt in Database"+" "+emailList.get(0).getEmail();
 			request.setAttribute("message", message);
+			request.setAttribute("user",emailList.get(0) );
 			RequestDispatcher rd = request.getRequestDispatcher("users_form.jsp");
 			rd.forward(request, response);
-		} else
-		{
+		} else {
 			userdao.create(user);
+			request.setAttribute("user", null);
 			listUsers(request, response, "New User successfully Added");
 		}
 
 	}
+
+	// Edit User
+	public void editUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		Users user = userdao.get(id);
+		if(user!=null)
+		{
+		request.setAttribute("user", user);
+		RequestDispatcher rd = request.getRequestDispatcher("users_form.jsp");
+		rd.forward(request, response);
+		}
+		else
+		{
+		request.setAttribute("user", null);
+		listUsers(request, response, "User with this emailId doesnt exixt"+" "+id);
+		}
+		
+
+	}
+
+	// Update Users
+	public void updateUser(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		int id = Integer.parseInt(request.getParameter("id"));
+		String name = request.getParameter("full_name");
+		String email = request.getParameter("email");
+		String password = request.getParameter("pwd");
+		Users user = new Users();
+		user.setUserid(id);
+		user.setFullName(name);
+		user.setEmail(email);
+		user.setPassword(password);
+
+		List<Users> emailList = userdao.findByEmail(email);
+		System.out.println("Service:"+emailList);
+		if (emailList.size()>1) {
+			String message = "Email is belong to other user"+" "+emailList.get(0).getEmail();
+			request.setAttribute("message", message);
+			editUser(request, response);
+		} else {
+			userdao.update(user);
+			listUsers(request, response, "User has Updated Successfully");
+		}
+	}
+	
+	public void deleteUser(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		int id=Integer.parseInt(request.getParameter("id"));
+		if(id==33)
+		{
+			request.setAttribute("user", "");
+			listUsers(request, response, "Default Admin cannot be deleted");
+			return;
+		}
+		Users user=userdao.get(id);
+		if(user==null)
+		{
+			request.setAttribute("user", "");
+			listUsers(request, response, "User is deleted by other Admin");
+			
+		}
+		else
+		{
+		userdao.delete(id);
+		request.setAttribute("user", "");
+		listUsers(request, response, "User has Deleted Successfully");
+		}
+	}
+
 }

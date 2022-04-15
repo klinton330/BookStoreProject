@@ -30,10 +30,20 @@
 	<div style="text-align: center; padding-top: 10px;">
 		<h2>Users Management</h2>
 		<a href="users_form.jsp">Create New Users</a>
-		
-		<div align="center" style="color: green;">
-			<h5>${message}</h5>
-		</div>
+
+		<c:if test="${user==null}">
+			 <div align="center" style="color: green;">
+				<h5>${message}</h5>
+			</div>
+			
+		</c:if>
+		<c:if test="${user!=null}">
+			<div align="center" style="color: red;">
+				<h5>${message}</h5>
+			</div>
+		</c:if>
+
+
 	</div>
 	<div></div>
 	<div style="">
@@ -57,8 +67,8 @@
 						<td>${user.userid}</td>
 						<td>${user.email}</td>
 						<td>${user.fullName}</td>
-						<td><a href="#">Edit</a></td>
-						<td><a href="#">Delete</a></td>
+						<td><a href="edit_user?id=${user.userid}">Edit</a></td>
+						<td><a href="javascript:confirmDelete(${user.userid})">Delete</a></td>
 					</tr>
 
 				</c:forEach>
@@ -112,5 +122,14 @@
 	</div>
 
 	<%@ include file="footer.jsp"%>
+	<script type="text/javascript">
+	  function confirmDelete(userId)
+	  {
+		 if(confirm("Do you really want to delete"));
+		 {
+			 window.location="delete_user?id="+userId;
+		 }
+	  }
+	</script>
 </body>
 </html>
